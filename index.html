@@ -295,6 +295,7 @@
         unfollow_accurate_training: 0,
         unfollow_inaccurate_training: 0, 
         total_success_training: 0,
+        success_unfollow_accurate_training: 0,
         total_success_test: 0,
         total_clicks_test: 0,
         points_lost_follow_accurate_training: 0,     // ★追加
@@ -748,6 +749,10 @@
                             } else {
                                 playAudio('reward_small');
                                 summary_data.total_success_training++;
+                                let hint_side = d.text.includes("左") ? 0 : 1;
+                                if (d.char === 'accurate' && side !== hint_side) {
+                                    summary_data.success_unfollow_accurate_training++;
+                                }
                             }
                             showFloatingPoints(rew, side, btnId);
                         } else if (current_phase === 'test') {
@@ -1137,7 +1142,8 @@
               follow_inaccurate_training: typeof summary_data !== 'undefined' ? summary_data.follow_inaccurate_training : 0,
               unfollow_accurate_training: typeof summary_data !== 'undefined' ? summary_data.unfollow_accurate_training : 0,
               unfollow_inaccurate_training: typeof summary_data !== 'undefined' ? summary_data.unfollow_inaccurate_training : 0,
-              total_success_training: typeof summary_data !== 'undefined' ? summary_data.total_success_training : 0, 
+              success_unfollow_accurate_training: typeof summary_data !== 'undefined' ? summary_data.success_unfollow_accurate_training : 0,
+              total_success_training: typeof summary_data !== 'undefined' ? summary_data.total_success_training : 0,
               total_success_test: typeof summary_data !== 'undefined' ? summary_data.total_success_test : 0,
               total_clicks_test: typeof summary_data !== 'undefined' ? summary_data.total_clicks_test : 0,
               follow_red_test: typeof summary_data !== 'undefined' ? summary_data.follow_red_test : 0,
